@@ -1,5 +1,5 @@
-import { type StaticImport } from "next/dist/shared/lib/get-img-props";
 import {
+  BlogIcon,
   GitHubIcon,
   HomeIcon,
   LinkedIcon,
@@ -7,14 +7,14 @@ import {
   ProjectIcon,
   TwitterIcon,
 } from "public/svg";
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 
 export interface MenuItem {
   id: number;
   name: string;
   link: string;
-  icon?: string | StaticImport;
-  iconLight?: string | StaticImport;
+  icon?: string | object;
+  iconLight?: string | object;
 }
 
 export const userInfo = {
@@ -37,6 +37,13 @@ export const menuItems: MenuItem[] = [
     name: "Open Source",
     link: "/open-source",
     icon: OpenSourceIcon,
+    iconLight: "",
+  },
+  {
+    id: 4,
+    name: "Blog",
+    link: "/blog",
+    icon: BlogIcon,
     iconLight: "",
   },
 ];

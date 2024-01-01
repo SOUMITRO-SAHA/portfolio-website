@@ -5,6 +5,7 @@ import ProjectIcon from "./projects-alt-svgrepo-com.svg";
 import GitHubIcon from "./github-142-svgrepo-com.svg";
 import LinkedIcon from "./linkedin-rounded-svgrepo-com.svg";
 import TwitterIcon from "./twitter-x-seeklogo.com-4.svg";
+import BlogIcon from "./blog-writing-svgrepo-com.svg";
 
 export {
   BurgerMenuIcon,
@@ -14,4 +15,5 @@ export {
   GitHubIcon,
   LinkedIcon,
   TwitterIcon,
+  BlogIcon,
 };

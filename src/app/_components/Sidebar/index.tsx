@@ -23,7 +23,7 @@ const SideMenu: React.FC = () => {
           <Link href={link} title={title}>
             <div key={id} title={title} className="py-2">
               <Image
-                src={icon}
+                src={icon as string}
                 alt={title}
                 title={title}
                 className="h-8 w-8 p-1"
