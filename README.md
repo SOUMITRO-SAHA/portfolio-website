@@ -1,28 +1,40 @@
-# Create T3 App
+# Soumitra Saha Portfolio
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to my personal portfolio website! This project showcases my skills, projects, and experience as a Full-Stack Developer.
 
-## What's next? How do I make an app with this?
+## Table of Contents
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- [Soumitra Saha Portfolio](#soumitra-saha-portfolio)
+  - [Table of Contents](#table-of-contents)
+  - [About](#about)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+  - [Getting Started](#getting-started)
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## About
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+This portfolio website serves as a showcase of my work and skills as a Full-Stack Developer. It provides an overview of my background, projects I've worked on, my skills, and ways to connect with me.
 
-## Learn More
+## Features
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **Home Page:** Introduces visitors to the website and provides a brief overview of my skills and expertise.
+- **Projects Page:** Showcases various projects I've worked on, including descriptions, technologies used, and links to GitHub repositories or live demos.
+- **Skills Page:** Details my technical skills and proficiencies across different technologies and programming languages.
+- **Contact Page:** Offers multiple ways for visitors to get in touch with me, including a contact form and links to my social media profiles and GitHub.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Technologies Used
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- **Next.js:** A React framework for building server-side rendered and static web applications.
+- **Tailwind CSS:** A utility-first CSS framework for creating custom and responsive designs.
+- **Prisma ORM:** A modern database toolkit for Node.js and TypeScript, used with MongoDB.
+- **tRPC:** A TypeScript RPC (Remote Procedure Call) framework for building type-safe APIs.
 
-## How do I deploy this?
+## Getting Started
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+To get a local copy of this project up and running, follow these steps:
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/your-username/your-portfolio.git
+   cd your-portfolio
