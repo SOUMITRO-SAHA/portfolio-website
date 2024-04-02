@@ -5,6 +5,11 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  i18n: {
+    locales: ["en-US", "fr", "ar", "bn", "hi-IN", "ru-RU", "nl-NL"],
+    defaultLocale: "en-US",
+  },
+};
 
 export default config;
