@@ -1,11 +1,8 @@
 import "@/styles/globals.css";
-
+import { TRPCReactProvider } from "@/trpc/react";
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
-
-import { TRPCReactProvider } from "@/trpc/react";
-import SideMenu from "./_components/Sidebar";
-import MobileMenu from "./_components/Sidebar/Mobile.Component";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,22 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider cookies={cookies().toString()}>
-          <main className="grid grid-cols-12 gap-4">
-            {/* Mobile Menu */}
-            <main className="col-span-full md:hidden">
-              <MobileMenu />
-            </main>
-
-            {/* Desktop Menu */}
-            <main className="hidden md:col-span-3 md:block xl:col-span-2">
-              <SideMenu />
-            </main>
-
-            {/* Body */}
-            <main className="col-span-full md:col-span-9 xl:col-span-10">
-              {children}
-            </main>
-          </main>
+          {children}
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>
