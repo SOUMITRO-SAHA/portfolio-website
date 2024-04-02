@@ -10,6 +10,13 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// Enums
+enum UserRoles {
+    ADMIN
+    VISITORS
+}
+
+// Models
 model Session {
     id           String   @id @default(cuid())
     sessionToken String   @unique
@@ -19,12 +26,29 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    email         String?   @unique
+    id            String     @id @default(cuid())
+    name          String
+    password      String?
+    username      String     @unique
+    email         String     @unique
     emailVerified DateTime?
     image         String?
-    sessions      Session[]
+    role          UserRoles?
+    bio           String?
+    shortBio      String?
+    githubLink    String?
+    linkedInLink  String?
+    twitterLink   String?
+
+    // Relationship
+    sessions                Session[]
+    blogs                   Blog[]
+    projects                Project[]
+    openSourceContributions OpenSourceContribution[]
+    youtubeVideos           YouTubeVideo[]
+    feedbacks               Feedback[]
+
+    @@index([email, username])
 }
 
 model VerificationToken {
@@ -33,4 +57,77 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model WebsiteInfo {
+    id                   String   @id @default(cuid())
+    views                Int      @default(autoincrement())
+    mostViewedPage       String?
+    anonymousUserInfo    Json?
+    visitorGeoLocation   Json?
+    totalUsers           Int?
+    trafficSources       Json? // Sources of website traffic (e.g., direct, organic, referral)
+    averageSessionLength Float? // Average length of time visitors spend on the website
+    bounceRate           Float? // Percentage of visitors who navigate away from the site after viewing only one page
+    mostViewedProjects   Json? // Information about the most viewed projects on the website
+    createdAt            DateTime @default(now())
+    updatedAt            DateTime @updatedAt
+}
+
+model Blog {
+    id      String  @id @default(cuid())
+    title   String
+    content String
+    author  String
+    User    User?   @relation(fields: [userId], references: [id])
+    userId  String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Project {
+    id          String   @id @default(cuid())
+    name        String
+    description String
+    url         String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    User        User?    @relation(fields: [userId], references: [id])
+    userId      String?
+}
+
+model OpenSourceContribution {
+    id          String   @id @default(cuid())
+    repository  String
+    description String
+    url         String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    User        User?    @relation(fields: [userId], references: [id])
+    userId      String?
+}
+
+model YouTubeVideo {
+    id          String  @id @default(cuid())
+    title       String
+    description String
+    url         String
+    User        User?   @relation(fields: [userId], references: [id])
+    userId      String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Feedback {
+    id      String @id @default(cuid())
+    name    String
+    email   String
+    message String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    User      User?    @relation(fields: [userId], references: [id])
+    userId    String?
 }
