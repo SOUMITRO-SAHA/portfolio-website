@@ -7,7 +7,7 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   i18n: {
-    locales: ["en-US", "fr", "ar", "bn", "hi-IN", "ru-RU", "nl-NL"],
+    locales: ["en-US", "fr", "ar", "bn", "hi-IN", "it-IT", "ru-RU", "nl-NL"],
     defaultLocale: "en-US",
   },
 };
