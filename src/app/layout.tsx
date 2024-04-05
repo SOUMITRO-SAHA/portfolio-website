@@ -1,8 +1,8 @@
+import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import { TRPCReactProvider } from "@/trpc/react";
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
-import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],

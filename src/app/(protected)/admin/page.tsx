@@ -1,11 +1,11 @@
 import React from "react";
 
-interface AdminPageProps {
-  //Props
-}
-
-const AdminPage: React.FC<AdminPageProps> = () => {
-  return <div>AdminPage</div>;
+const AdminPage = () => {
+  return (
+    <div className="flex h-screen w-full items-center justify-center">
+      <div>Welcome the the Admin Panel</div>
+    </div>
+  );
 };
 
 export default AdminPage;
