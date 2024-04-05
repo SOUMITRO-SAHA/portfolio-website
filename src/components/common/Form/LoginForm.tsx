@@ -11,10 +11,11 @@ import { LoginSchema } from "@/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircleIcon, TriangleAlert } from "lucide-react";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import type * as z from "zod";
+import { config } from "@/shared";
 
 export const LoginForm = () => {
   const [success, setSuccess] = React.useState<string>("");
@@ -36,18 +37,19 @@ export const LoginForm = () => {
     // Calling the Server Actions
     startTransition(async () => {
       try {
-        const response = await signIn("credentials", {
-          email: values.email,
-          password: values.password,
+        const response = await signIn<"credentials">("credentials", {
+          ...values,
           redirect: false,
         });
 
-        if (response?.ok) {
+        if (response && response.ok) {
           setSuccess("Successfully Login!!!");
-          redirect("/admin");
         }
-        if (response?.error) {
-          setError(response?.error);
+        if (response && response.error) {
+          setError(response.error);
+        }
+        if (!response) {
+          setError("");
         }
       } catch (error) {
         if (error instanceof Error) {
@@ -62,7 +64,7 @@ export const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-[25%] space-y-2"
+        className="w-[40%] space-y-2 xl:w-[25%]"
       >
         <div className="space-y-4 p-4">
           <FormField
@@ -99,8 +101,10 @@ export const LoginForm = () => {
             )}
           />
         </div>
-        <FormSuccess message={success} />
-        <FormError message={error} />
+        <div className="px-4">
+          <FormSuccess message={success} />
+          <FormError message={error} />
+        </div>
         <div className="w-full px-4">
           <Button loading={isPending} type="submit" className="w-full">
             Submit
