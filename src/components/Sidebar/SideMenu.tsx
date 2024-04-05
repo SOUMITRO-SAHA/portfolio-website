@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ProfilePhoto } from "public/photos";
 import React from "react";
 import { Menus } from "./Menus";
+import { buttonVariants } from "../ui/button";
 
 interface ProfileDetailsProps {
   name: string;
@@ -33,9 +34,9 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
           className={cn("rounded-lg object-contain")}
         />
       </div>
-      <div className="mt-8 flex flex-col items-center justify-center gap-2 px-3">
-        <h3 className="text-xl uppercase">{name}</h3>
-        <p className="font-font-primary text-gray-1 text-sm">{shortInfo}</p>
+      <div className="mt-3 flex flex-col items-center justify-center gap-2 px-3">
+        <h3 className="text-xl font-semibold uppercase">{name}</h3>
+        <p className="font-font-primary text-sm text-zinc-500">{shortInfo}</p>
       </div>
     </div>
   );
@@ -50,9 +51,18 @@ export const SideMenu: React.FC = () => {
       </div>
       <div className="flex w-full items-center justify-center gap-3 bg-slate-900">
         {socials.map(({ id, icon, title, link }) => (
-          <Link href={link} key={id} title={title}>
+          <Link
+            className={cn(
+              buttonVariants({
+                variant: "ghost",
+              }),
+            )}
+            href={link}
+            key={id}
+            title={title}
+          >
             <div title={title} className="cursor-pointer py-2">
-              <Image src={icon as string} alt={title} className="h-8 w-8 p-1" />
+              {icon}
             </div>
           </Link>
         ))}
