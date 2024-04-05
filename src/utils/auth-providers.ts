@@ -2,20 +2,34 @@ import { db } from "@/server/db";
 import { config } from "@/shared";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import type { CredentialsConfig } from "next-auth/providers/credentials";
 import CredentialsProvider from "next-auth/providers/credentials";
+import type { Provider } from "next-auth/providers/index";
 
 // Auth options for NextAuth
-export const authProviders: CredentialsConfig[] = [
+export const authProviders: Provider[] = [
   CredentialsProvider({
-    name: "Credentials",
+    name: "credentials",
+    id: "credentials",
+    type: "credentials",
     credentials: {
-      email: { label: "Email", type: "email", placeholder: "" },
-      password: { label: "Password", type: "password", placeholder: "" },
+      email: {
+        label: "Email",
+        type: "email",
+        placeholder: "john.doe@example.com",
+      },
+      password: {
+        label: "Password",
+        type: "password",
+        placeholder: "Your super secure password",
+      },
     },
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    authorize: async (credentials: { email: string; password: string }) => {
+    async authorize(credentials: { email: string; password: string }) {
+      if (!credentials) {
+        console.error(`For some reason credentials are missing`);
+        return { success: false, message: "Invalid email or password." };
+      }
       try {
         // Destructure email and password from credentials
         const { email, password } = credentials;
