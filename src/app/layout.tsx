@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { getServerAuthSession } from "@/server/auth";
 import "@/styles/globals.css";
 import { TRPCReactProvider } from "@/trpc/react";
 import { Inter } from "next/font/google";
@@ -15,7 +16,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
