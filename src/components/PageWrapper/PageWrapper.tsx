@@ -4,12 +4,17 @@ import { StoreProvider } from "@/store/store";
 import React from "react";
 import { SideMenu } from "../Sidebar";
 import MobileMenu from "../Sidebar/Mobile";
-import { ThemeProvider } from "../ui/theme-provider";
+import { ThemeProvider } from "@/components/common/theme-provider";
 
-const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <StoreProvider>
-      <ThemeProvider>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
         <main className="grid grid-cols-12 gap-4">
           {/* Mobile Menu */}
           <main className="col-span-full md:hidden">
@@ -22,7 +27,7 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => {
           </main>
 
           {/* Body */}
-          <main className="col-span-full md:col-span-9 xl:col-span-10">
+          <main className="col-span-full p-6 px-4 md:col-span-9 xl:col-span-10">
             {children}
           </main>
         </main>
@@ -30,5 +35,3 @@ const PageWrapper = ({ children }: { children: React.ReactNode }) => {
     </StoreProvider>
   );
 };
-
-export default PageWrapper;
