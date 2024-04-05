@@ -40,11 +40,15 @@ export const MenuItemComponent: React.FC<MenuProps> = ({
     <Link href={link} key={id}>
       <div
         className={cn(
-          "grid cursor-pointer grid-cols-12 items-center gap-2 p-1 px-3 text-sm leading-loose hover:bg-slate-700",
+          "grid cursor-pointer grid-cols-12 items-center gap-2 p-1 px-3 text-sm leading-loose hover:bg-primary-foreground dark:hover:bg-slate-700",
         )}
       >
         {icon && <div className={cn(icon ? "col-span-2" : "")}>{icon}</div>}
-        <div className={cn(icon ? "col-span-10" : "col-span-full")}>{name}</div>
+        <div
+          className={cn("text-primary", icon ? "col-span-10" : "col-span-full")}
+        >
+          {name}
+        </div>
       </div>
     </Link>
   );

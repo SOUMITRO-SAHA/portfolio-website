@@ -20,7 +20,7 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
   shortInfo,
 }) => {
   return (
-    <div className={cn("mb-6 w-full")}>
+    <div className={cn("mb-6 w-full text-primary")}>
       <div
         className={cn(
           "flex h-44 w-full items-center justify-center p-4 px-8 pt-6",
@@ -43,14 +43,19 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
   );
 };
 
-export const SideMenu: React.FC = () => {
+export const SideMenu = ({ className }: { className?: string }) => {
   return (
-    <section className="flex h-screen w-full flex-col justify-between bg-slate-950 text-white">
+    <section
+      className={cn(
+        "flex h-screen w-full flex-col justify-between bg-secondary text-white dark:bg-background",
+        className,
+      )}
+    >
       <div className="flex flex-col gap-4">
         <ProfileDetails name={userInfo?.name} shortInfo={userInfo?.shortInfo} />
         <Menus menuItems={menuItems} />
       </div>
-      <div className="flex w-full items-center justify-center gap-3 bg-slate-900">
+      <div className="flex w-full items-center justify-center gap-3 bg-primary/90 py-1 dark:bg-slate-900">
         {socials.map(({ id, icon, title, link }) => (
           <Link
             className={cn(
