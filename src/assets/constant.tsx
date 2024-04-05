@@ -1,13 +1,8 @@
+import { cn } from "@/utils";
+import { Atom, GitPullRequestArrow, Home, Rss } from "lucide-react";
 import * as React from "react";
-import {
-  Home,
-  GitPullRequestArrow,
-  Rss,
-  Atom,
-  Github,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { RiTwitterXFill } from "react-icons/ri";
 
 export interface MenuItem {
   id: number;
@@ -54,19 +49,19 @@ export const socials: Social[] = [
   {
     id: 1,
     title: "github",
-    icon: <Github />,
+    icon: <FaGithub />,
     link: "https://github.com/SOUMITRO-SAHA",
   },
   {
     id: 2,
     title: "linkedin",
-    icon: <Linkedin />,
+    icon: <FaLinkedin />,
     link: "https://www.linkedin.com/in/soumitra-saha-a9810622a/",
   },
   {
     id: 3,
     title: "twitter | X",
-    icon: <Twitter />,
+    icon: <RiTwitterXFill />,
     link: "https://www.linkedin.com/in/soumitra-saha-a9810622a/",
   },
 ];
