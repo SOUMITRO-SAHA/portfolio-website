@@ -15,6 +15,7 @@ const config = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/prefer-optional-chain": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
