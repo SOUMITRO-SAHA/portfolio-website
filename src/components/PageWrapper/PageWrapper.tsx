@@ -15,7 +15,7 @@ export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
         enableSystem
         disableTransitionOnChange
       >
-        <main className="grid grid-cols-12 gap-4">
+        <main className="grid grid-cols-12 gap-4 dark:bg-secondary">
           {/* Mobile Menu */}
           <main className="col-span-full md:hidden">
             <MobileMenu />
