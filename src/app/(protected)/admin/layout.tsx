@@ -1,14 +1,14 @@
-import React from "react";
-import { notFound, redirect } from "next/navigation";
-import { getServerSession } from "next-auth";
+import { getServerAuthSession } from "@/server/auth";
 import { config } from "@/shared";
+import { notFound, redirect } from "next/navigation";
+import React from "react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = async ({ children }) => {
-  const session = await getServerSession();
+  const session = await getServerAuthSession();
 
   if (!session || !session.user) {
     return redirect("/auth/login");
