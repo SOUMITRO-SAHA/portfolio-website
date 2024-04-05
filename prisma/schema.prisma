@@ -26,15 +26,15 @@ model Session {
 }
 
 model User {
-    id            String     @id @default(cuid())
-    name          String
+    id            String    @id @default(cuid())
+    email         String    @unique
     password      String
-    username      String     @unique
-    email         String     @unique
+    name          String?
+    username      String?   @unique
     emailVerified DateTime?
     accessToken   String?
     image         String?
-    role          UserRoles?
+    role          UserRoles @default(VISITORS)
     bio           String?
     shortBio      String?
     githubLink    String?
@@ -73,6 +73,25 @@ model WebsiteInfo {
     mostViewedProjects   Json? // Information about the most viewed projects on the website
     createdAt            DateTime @default(now())
     updatedAt            DateTime @updatedAt
+}
+
+model WorkExperience {
+    id          String                  @id @default(cuid())
+    company     String
+    description String
+    start       DateTime
+    end         DateTime
+    createdAt   DateTime                @default(now())
+    updatedAt   DateTime                @updatedAt
+    projects    WorkExperienceProject[]
+}
+
+model WorkExperienceProject {
+    id               String          @id @default(cuid())
+    title            String
+    link             String
+    WorkExperience   WorkExperience? @relation(fields: [workExperienceId], references: [id])
+    workExperienceId String?
 }
 
 model Blog {
