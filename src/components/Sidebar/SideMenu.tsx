@@ -6,6 +6,7 @@ import { ProfilePhoto } from "public/photos";
 import React from "react";
 import { Menus } from "./Menus";
 import { buttonVariants } from "../ui/button";
+import { ThemeToggle } from "../common";
 
 interface ProfileDetailsProps {
   name: string;
@@ -60,12 +61,14 @@ export const SideMenu: React.FC = () => {
             href={link}
             key={id}
             title={title}
+            target="_blank"
           >
             <div title={title} className="cursor-pointer py-2">
               {icon}
             </div>
           </Link>
         ))}
+        <ThemeToggle />
       </div>
     </section>
   );
