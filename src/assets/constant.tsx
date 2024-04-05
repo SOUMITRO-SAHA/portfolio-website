@@ -32,8 +32,8 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: 4,
-    name: "Blog",
-    link: "/blog",
+    name: "Blogs",
+    link: "/blogs",
     icon: <Rss />,
   },
 ];
@@ -62,6 +62,6 @@ export const socials: Social[] = [
     id: 3,
     title: "twitter | X",
     icon: <RiTwitterXFill />,
-    link: "https://www.linkedin.com/in/soumitra-saha-a9810622a/",
+    link: "https://twitter.com/SoumitraSaha100",
   },
 ];
