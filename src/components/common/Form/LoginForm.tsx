@@ -44,7 +44,7 @@ export const LoginForm = () => {
 
         if (response?.ok) {
           setSuccess("Successfully Login!!!");
-          redirect("/");
+          redirect("/admin");
         }
         if (response?.error) {
           setError(response?.error);
