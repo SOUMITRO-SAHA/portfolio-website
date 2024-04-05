@@ -1,4 +1,3 @@
-import { cn } from "@/utils";
 import { Atom, GitPullRequestArrow, Home, Rss } from "lucide-react";
 import * as React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -17,24 +16,24 @@ export const userInfo = {
 };
 
 export const menuItems: MenuItem[] = [
-  { id: 1, name: "Home", link: "/", icon: <Home /> },
+  { id: 1, name: "Home", link: "/", icon: <Home className="stroke-primary" /> },
   {
     id: 2,
     name: "Projects",
     link: "/projects",
-    icon: <Atom />,
+    icon: <Atom className="stroke-primary" />,
   },
   {
     id: 3,
     name: "Open Source",
     link: "/open-source",
-    icon: <GitPullRequestArrow />,
+    icon: <GitPullRequestArrow className="stroke-primary" />,
   },
   {
     id: 4,
     name: "Blogs",
     link: "/blogs",
-    icon: <Rss />,
+    icon: <Rss className="stroke-primary" />,
   },
 ];
 
