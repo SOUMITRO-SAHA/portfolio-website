@@ -1,5 +1,6 @@
 import { db } from "@/server/db";
-import type { UserRole } from "@/types";
+import { config } from "@/shared";
+import { authProviders } from "@/utils/auth-providers";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import {
   getServerSession,
@@ -7,51 +8,50 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 
-/**
- * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
- * object and keep type safety.
- *
- * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
- */
+// Extend the Session interface to include additional user properties
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      role: UserRole;
-      // ...other properties
-    } & DefaultSession["user"];
+      role: string;
+      token: string;
+      email: string;
+    };
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
+// Define the NextAuth options
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session: async ({ session, token }) => {
+      // If session and session.user exist, update user properties
+      if (session && session.user) {
+        session.user.id = String(token.uid);
+        session.user.token = String(token.token);
+        session.user.role = config.ADMIN_EMAIL.includes(
+          String(session.user.email),
+        )
+          ? "ADMIN"
+          : "VISITOR";
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      // If user exists, update token properties
+      if (user) {
+        token.uid = user.id;
+        token.token = user && "token" in user ? String(user.token) : "";
+      }
+
+      return token;
+    },
   },
   adapter: PrismaAdapter(db),
-  providers: [
-    // TODO add the Google Provider Here
-  ],
+  providers: [...authProviders],
+  pages: {
+    signIn: "/auth/login",
+  },
 };
 
-/**
- * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
- *
- * @see https://next-auth.js.org/configuration/nextjs
- */
+// Function to get the server authentication session
 export const getServerAuthSession = () => getServerSession(authOptions);
