@@ -2,7 +2,7 @@
 
 import { CEExperience } from "@/components/CRUD/Experience";
 import { AdminPageWrapper } from "@/components/PageWrapper";
-import { AppHeader } from "@/components/app-header/AppHeader";
+import { AppHeader } from "@/components/app-header";
 import { ExperienceCard } from "@/components/cards";
 import { Section, Title } from "@/components/common";
 import { Search } from "@/components/search";
