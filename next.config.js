@@ -10,6 +10,9 @@ const config = {
     locales: ["en-US", "fr", "ar", "bn", "hi-IN", "it-IT", "ru-RU", "nl-NL"],
     defaultLocale: "en-US",
   },
+  images: {
+    domains: ["media.licdn.com"],
+  },
 };
 
 export default config;
