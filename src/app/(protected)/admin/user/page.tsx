@@ -1,6 +1,6 @@
 "use client";
 
-import AdminPageWrapper from "@/components/PageWrapper/AdminPageWrapper";
+import { AdminPageWrapper } from "@/components/PageWrapper";
 import { Button } from "@/components/ui/button";
 import {
   Form,
