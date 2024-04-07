@@ -83,6 +83,7 @@ model Experience {
     description String    @db.Text
     start       DateTime
     end         DateTime?
+    logo        String?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
