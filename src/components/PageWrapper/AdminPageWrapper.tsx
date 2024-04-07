@@ -1,12 +1,16 @@
 "use client";
 
+import { adminMenuItems } from "@/assets/admin-constant";
+import { ThemeProvider } from "@/components/common/theme-provider";
 import { StoreProvider } from "@/store/store";
 import React from "react";
 import { SideMenu } from "../sidebar";
-import MobileMenu from "../sidebar/Mobile";
-import { ThemeProvider } from "@/components/common/theme-provider";
 
-export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+export const AdminPageWrapper = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <StoreProvider>
       <ThemeProvider
@@ -15,15 +19,10 @@ export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
         enableSystem
         disableTransitionOnChange
       >
-        <main className="grid grid-cols-12 gap-4 dark:bg-secondary">
-          {/* Mobile Menu */}
-          <main className="col-span-full md:hidden">
-            <MobileMenu />
-          </main>
-
+        <main className="grid h-screen w-screen grid-cols-12 gap-4 dark:bg-secondary">
           {/* Desktop Menu */}
-          <main className="hidden md:col-span-3 md:block xl:col-span-2">
-            <SideMenu />
+          <main className="col-span-3 xl:col-span-2">
+            <SideMenu menuItems={adminMenuItems} />
           </main>
 
           {/* Body */}
