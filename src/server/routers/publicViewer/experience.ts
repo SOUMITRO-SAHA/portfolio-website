@@ -3,21 +3,29 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "@/server/trpc";
-import {
-  addProjectsInputSchema,
-  createWorkExperienceInputSchema,
-} from "@/validators/experience.validator";
+import { ExperienceSchema } from "@/validators/experience.validator";
 import * as z from "zod";
 
 export const experienceRouter = createTRPCRouter({
   // Fetch all work experiences
   getAll: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.db.workExperience.findMany({
+    return await ctx.db.experience.findMany({
       select: {
         id: true,
         company: true,
         description: true,
-        projects: true,
+        logo: true,
+        projects: {
+          select: {
+            id: true,
+            description: true,
+            duration: true,
+            name: true,
+            url: true,
+          },
+        },
+        start: true,
+        end: true,
       },
     });
   }),
@@ -27,70 +35,37 @@ export const experienceRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input }) => {
       const { id } = input;
-      return await ctx.db.workExperience.findUnique({
+      return await ctx.db.experience.findUnique({
         where: { id },
+        include: {
+          projects: true,
+        },
       });
     }),
 
   // Create a new work experience
   create: protectedProcedure
-    .input(createWorkExperienceInputSchema)
+    .input(ExperienceSchema)
     .mutation(async ({ ctx, input }) => {
       const { company, description, projects, start, end } = input;
 
       // First, Create a new work experience
-      const workEx = await ctx.db.workExperience.create({
+      const experience = await ctx.db.experience.create({
         data: {
           company,
           description,
           start,
           end,
+          projects: {
+            create: projects,
+          },
         },
-        select: {
-          id: true,
+        include: {
+          projects: true,
         },
       });
 
-      // Second, Create new projects for the new work experience
-      let projectsFromDB: any = null;
-      if (projects && projects.length > 0) {
-        projectsFromDB = await Promise.all(
-          projects.map(async (project) => {
-            const { link, title } = project;
-            return await ctx.db.workExperienceProject.create({
-              data: {
-                workExperienceId: workEx.id,
-                title,
-                link,
-              },
-            });
-          }),
-        );
-      }
-
-      return {
-        ...workEx,
-        projects: projectsFromDB,
-      };
-    }),
-
-  // Add projects to a work experience
-  addProjects: protectedProcedure
-    .input(addProjectsInputSchema)
-    .mutation(async ({ ctx, input }) => {
-      const { id, projects } = input;
-      return await Promise.all(
-        projects.map(async (project) => {
-          const { link, title } = project;
-          return await ctx.db.workExperienceProject.create({
-            data: {
-              workExperienceId: id,
-              title,
-              link,
-            },
-          });
-        }),
-      );
+      return experience;
     }),
 
   // Delete a work experience by ID
@@ -98,7 +73,8 @@ export const experienceRouter = createTRPCRouter({
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const { id } = input;
-      return await ctx.db.workExperience.delete({
+
+      return await ctx.db.experience.delete({
         where: {
           id,
         },
