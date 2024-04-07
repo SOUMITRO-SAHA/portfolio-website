@@ -1,12 +1,17 @@
+import {
+  defaultMenuItems,
+  socials,
+  userInfo,
+  type MenuItem,
+} from "@/assets/constant";
 import { cn } from "@/utils";
-import { menuItems, socials, userInfo } from "@/assets/constant";
 import Image from "next/image";
 import Link from "next/link";
 import { ProfilePhoto } from "public/photos";
 import React from "react";
-import { Menus } from "./Menus";
-import { buttonVariants } from "../ui/button";
 import { ThemeToggle } from "../common";
+import { buttonVariants } from "../ui/button";
+import { Menus } from "./Menus";
 
 interface ProfileDetailsProps {
   name: string;
@@ -43,7 +48,15 @@ const ProfileDetails: React.FC<ProfileDetailsProps> = ({
   );
 };
 
-export const SideMenu = ({ className }: { className?: string }) => {
+export const SideMenu = ({
+  className,
+  menuItems,
+}: {
+  className?: string;
+  menuItems?: MenuItem[];
+}) => {
+  const currentMenuItem = menuItems ? menuItems : defaultMenuItems;
+
   return (
     <section
       className={cn(
@@ -53,7 +66,7 @@ export const SideMenu = ({ className }: { className?: string }) => {
     >
       <div className="flex flex-col gap-4">
         <ProfileDetails name={userInfo?.name} shortInfo={userInfo?.shortInfo} />
-        <Menus menuItems={menuItems} />
+        <Menus menuItems={currentMenuItem} />
       </div>
       <div className="flex w-full items-center justify-center gap-3 bg-primary/90 py-1 dark:bg-slate-900">
         {socials.map(({ id, icon, title, link }) => (
