@@ -11,16 +11,15 @@ import { LoginSchema } from "@/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircleIcon, TriangleAlert } from "lucide-react";
 import { signIn } from "next-auth/react";
-import { RedirectType, redirect } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import type * as z from "zod";
-import { config } from "@/shared";
 
 export const LoginForm = () => {
   const [success, setSuccess] = React.useState<string>("");
   const [error, setError] = React.useState("");
   const [isPending, startTransition] = React.useTransition();
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
