@@ -23,12 +23,15 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider cookies={cookies().toString()}>
+      <TRPCReactProvider cookies={cookies().toString()}>
+        <body className={`font-sans ${inter.variable}`}>
           {children}
           <Toaster />
-        </TRPCReactProvider>
-      </body>
+
+          {/* Modal */}
+          <div id="modal" key={"modal"} />
+        </body>
+      </TRPCReactProvider>
     </html>
   );
 }
