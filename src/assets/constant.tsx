@@ -1,3 +1,4 @@
+import { cn } from "@/utils";
 import { Atom, GitPullRequestArrow, Home, Rss } from "lucide-react";
 import * as React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -15,7 +16,7 @@ export const userInfo = {
   shortInfo: "Full - Stack Developer",
 };
 
-export const menuItems: MenuItem[] = [
+export const defaultMenuItems: MenuItem[] = [
   { id: 1, name: "Home", link: "/", icon: <Home className="stroke-primary" /> },
   {
     id: 2,
@@ -64,3 +65,23 @@ export const socials: Social[] = [
     link: "https://twitter.com/SoumitraSaha100",
   },
 ];
+
+export const getOverlayStyle = (isOpen = false) => {
+  const overlayClasses = cn(
+    isOpen
+      ? "h-screen w-screen fixed inset-0 backdrop-filter backdrop-blur-sm bg-opacity-50 transition-opacity duration-300 ease-in-out z-10"
+      : "hidden",
+  );
+
+  return overlayClasses;
+};
+
+export const getPopupStyle = (isOpen = false) => {
+  const popupClasses = cn(
+    isOpen
+      ? "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-6 rounded-md shadow-md w-[60%] bg-background transition-transform duration-300 ease-in-out shadow"
+      : "hidden",
+  );
+
+  return popupClasses;
+};
