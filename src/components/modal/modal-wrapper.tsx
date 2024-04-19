@@ -41,7 +41,13 @@ export const Modal: React.FC<ModalProps> = ({
 
   return ReactDOM.createPortal(
     <div className={cn(getOverlayStyle(isOpen), overlayClassName)}>
-      <div className={cn(getPopupStyle(isOpen), popupClassName, "relative")}>
+      <div
+        className={cn(
+          getPopupStyle(isOpen),
+          popupClassName,
+          "relative dark:bg-slate-900",
+        )}
+      >
         <div>
           <h2 className="text-lg font-semibold uppercase leading-relaxed">
             {title}
