@@ -2,16 +2,15 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/utils";
+import type { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { buttonVariants } from "../ui/button";
-import type { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { Badge } from "../ui/badge";
-import Image from "next/image";
+import { buttonVariants } from "../ui/button";
 
 export interface ExperienceCardProps {
   id: string;
@@ -35,6 +34,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = (props) => {
         <div className="flex items-center gap-3">
           <Image
             src={props.logo ?? ""}
+            alt={`${props.company}__logo`}
             width={50}
             height={50}
             className="h-full rounded-md"
