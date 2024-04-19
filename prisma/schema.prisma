@@ -78,40 +78,58 @@ model WebsiteInfo {
 }
 
 model Experience {
-    id          String    @id @default(cuid())
+    id String @id @default(cuid())
+
     company     String
     description String    @db.Text
     start       DateTime
     end         DateTime?
     logo        String?
 
+    projects Project[]
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
 
-    projects Project[]
+model Education {
+    id String @id @default(cuid())
+
+    courseName        String
+    description       String   @db.Text
+    topics            String   @db.Text
+    tags              String[]
+    imageUrl          String?
+    certificationLink String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model Project {
-    id          String  @id @default(cuid())
+    id String @id @default(cuid())
+
     name        String
     description String?
     url         String?
     duration    Int?    @default(3)
 
+    userId       String?
+    experienceId String?
+    user         User?       @relation(fields: [userId], references: [id])
+    experience   Experience? @relation(fields: [experienceId], references: [id])
+
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    userId       String?
-    user         User?       @relation(fields: [userId], references: [id])
-    experienceId String?
-    experience   Experience? @relation(fields: [experienceId], references: [id])
 }
 
 model Blog {
-    id      String @id @default(cuid())
-    title   String
-    content String
-    author  String
+    id          String  @id @default(cuid())
+    title       String
+    metadata    Json?
+    content     String?
+    author      String?
+    authorEmail String? @default("soumitrosahaofficial@gmail.com")
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -121,10 +139,14 @@ model Blog {
 }
 
 model OpenSourceContribution {
-    id          String  @id @default(cuid())
-    repository  String
-    description String
-    url         String?
+    id         String  @id @default(cuid())
+    repository String
+    isPRMerged Boolean @default(false)
+
+    description String?
+    issueLink   String?
+    prLink      String?
+    metadata    String?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
