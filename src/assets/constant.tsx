@@ -1,5 +1,5 @@
 import { cn } from "@/utils";
-import { Atom, GitPullRequestArrow, Home, Rss } from "lucide-react";
+import { Atom, GitPullRequestArrow, Home, Route, Rss } from "lucide-react";
 import * as React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
@@ -26,12 +26,18 @@ export const defaultMenuItems: MenuItem[] = [
   },
   {
     id: 3,
+    name: "My Journey",
+    link: "/journey",
+    icon: <Route className="stroke-primary" />,
+  },
+  {
+    id: 4,
     name: "Open Source",
     link: "/open-source",
     icon: <GitPullRequestArrow className="stroke-primary" />,
   },
   {
-    id: 4,
+    id: 5,
     name: "Blogs",
     link: "/blogs",
     icon: <Rss className="stroke-primary" />,
@@ -85,3 +91,6 @@ export const getPopupStyle = (isOpen = false) => {
 
   return popupClasses;
 };
+
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));

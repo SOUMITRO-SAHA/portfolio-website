@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { UserSchema } from "@/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as React from "react";
@@ -18,7 +19,6 @@ import { useForm } from "react-hook-form";
 import type * as z from "zod";
 
 const AdminUserPage = () => {
-  const [error, setError] = React.useState("");
   const [isPending, startTransition] = React.useTransition();
 
   const form = useForm<z.infer<typeof UserSchema>>({
@@ -31,7 +31,11 @@ const AdminUserPage = () => {
         console.log(value);
       } catch (error) {
         if (error instanceof Error) {
-          setError(error.message);
+          toast({
+            title: "Something went wrong!!!",
+            description: error.message,
+            variant: "destructive",
+          });
         }
         console.error(error);
       }

@@ -39,3 +39,8 @@ export const adminMenuItems: MenuItem[] = [
     icon: <Rss className="text-primary" />,
   },
 ];
+
+export interface FilterOptionsType {
+  label: string;
+  value: string;
+}

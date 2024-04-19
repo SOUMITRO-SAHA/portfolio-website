@@ -1,6 +1,6 @@
 "use client";
 
-import { PageWrapper } from "@/components/PageWrapper";
+import { AdminPageWrapper } from "@/components/PageWrapper";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -51,7 +51,7 @@ const BlogsPage = () => {
   };
 
   return (
-    <PageWrapper>
+    <AdminPageWrapper>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -105,7 +105,7 @@ const BlogsPage = () => {
           </div>
         </form>
       </Form>
-    </PageWrapper>
+    </AdminPageWrapper>
   );
 };
 

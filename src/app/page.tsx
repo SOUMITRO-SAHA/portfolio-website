@@ -1,8 +1,24 @@
+"use client";
+
+import About from "@/components/home/About";
+import TrainingsCertifications from "@/components/home/TrainingsCertifications";
+import WorkExperience from "@/components/home/WorkExperience";
 import { PageWrapper } from "@/components/PageWrapper";
-import { getServerAuthSession } from "@/server/auth";
+import { Divider } from "@/components/common";
 
-export default async function Home() {
-  const session = await getServerAuthSession();
+export default function HomePage() {
+  return (
+    <PageWrapper>
+      {/* About */}
+      <About />
+      <Divider />
 
-  return <PageWrapper>Dashboard</PageWrapper>;
+      {/* Work Experience */}
+      <WorkExperience />
+      <Divider />
+
+      {/* Trainings / Certifications */}
+      <TrainingsCertifications />
+    </PageWrapper>
+  );
 }
