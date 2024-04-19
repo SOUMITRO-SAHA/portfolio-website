@@ -30,8 +30,18 @@ export const H2 = ({ children }: { children: React.ReactNode }) => {
   return <h2>{children}</h2>;
 };
 
-export const H3 = ({ children }: { children: React.ReactNode }) => {
-  return <h3>{children}</h3>;
+export const H3 = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <h3 className={cn("text-base font-semibold capitalize", className)}>
+      {children}
+    </h3>
+  );
 };
 
 export const P = ({ children }: { children: React.ReactNode }) => {
