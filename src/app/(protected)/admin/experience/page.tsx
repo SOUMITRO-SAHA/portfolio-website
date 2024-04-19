@@ -1,12 +1,13 @@
 "use client";
 
-import { CEExperience } from "@/components/CRUD/Experience";
+import { CEExperience } from "@/components/CRUD/experience";
 import { AdminPageWrapper } from "@/components/PageWrapper";
 import { AppHeader } from "@/components/app-header";
 import { ExperienceCard } from "@/components/cards";
 import { Section, Title } from "@/components/common";
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { api } from "@/trpc/react";
 import { Loader2, Plus } from "lucide-react";
 import * as React from "react";
@@ -21,7 +22,7 @@ const AdminExperiencPage = () => {
   return (
     <AdminPageWrapper>
       <AppHeader>
-        <div className="flex w-[40%] items-center justify-between">
+        <div className="flex w-[50%] items-center justify-between xl:w-[40%]">
           {/* Title */}
           <Title>Experiences</Title>
 
@@ -52,22 +53,24 @@ const AdminExperiencPage = () => {
             <Loader2 className="h-20 w-20 animate-spin" />
           </div>
         ) : (
-          <div className="grid h-full w-full grid-cols-12 gap-5">
-            {experiences?.map((experience) => (
-              <div className="col-span-4">
-                <ExperienceCard
-                  logo={experience.logo!}
-                  company={experience.company}
-                  description={experience.description}
-                  id={experience.id}
-                  key={experience.id}
-                  projects={experience.projects}
-                  start={experience.start}
-                  end={experience.end}
-                />
-              </div>
-            ))}
-          </div>
+          <ScrollArea>
+            <div className="grid h-full w-full grid-cols-12 gap-5">
+              {experiences?.map((experience) => (
+                <div className="col-span-6 xl:col-span-4">
+                  <ExperienceCard
+                    logo={experience.logo!}
+                    company={experience.company}
+                    description={experience.description}
+                    id={experience.id}
+                    key={experience.id}
+                    projects={experience.projects}
+                    start={experience.start}
+                    end={experience.end}
+                  />
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
         )}
       </Section>
     </AdminPageWrapper>
