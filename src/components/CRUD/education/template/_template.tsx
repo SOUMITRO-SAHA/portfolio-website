@@ -142,7 +142,7 @@ const CEEducation: React.FC<CEEducationProps> = (props) => {
               name="courseName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Name</FormLabel>
+                  <FormLabel>Course Name*</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -160,7 +160,7 @@ const CEEducation: React.FC<CEEducationProps> = (props) => {
               name="certificationLink"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Certification Link</FormLabel>
+                  <FormLabel>Certification Link*</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -180,7 +180,7 @@ const CEEducation: React.FC<CEEducationProps> = (props) => {
                 <FormItem>
                   <FormLabel>
                     <div className="flex items-center gap-2">
-                      <h3>Tags</h3>
+                      <h3>Tags*</h3>
                       {!id && (
                         <span className="text-xs text-gray-400">
                           (Create Tags " , " seperated)
@@ -205,14 +205,31 @@ const CEEducation: React.FC<CEEducationProps> = (props) => {
             />
           </div>
 
-          {/* Description */}
-          <div className="col-span-6 h-full">
+          <div className="col-span-6 flex h-full flex-col gap-3">
+            {/* Image Url */}
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image Url</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Image Url"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            {/* Description */}
             <FormField
               control={form.control}
               name="description"
               render={({ field }) => (
-                <FormItem className="h-full">
-                  <FormLabel>Description</FormLabel>
+                <FormItem className="h-[calc(100%-2rem)]">
+                  <FormLabel>Description*</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
@@ -235,7 +252,7 @@ const CEEducation: React.FC<CEEducationProps> = (props) => {
                 <FormItem>
                   <FormLabel>
                     <div className="flex items-center gap-2">
-                      <h3>Topics</h3>
+                      <h3>Topics*</h3>
                       {!id && (
                         <span className="text-xs text-gray-400">
                           (It Support Markdown Inputs)

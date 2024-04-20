@@ -8,8 +8,14 @@ export const Divider = () => {
   return <div className="my-6" />;
 };
 
-export const Section = ({ children }: { children: React.ReactNode }) => {
-  return <section className="">{children}</section>;
+export const Section = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <section className={cn("", className)}>{children}</section>;
 };
 
 export const H1 = ({

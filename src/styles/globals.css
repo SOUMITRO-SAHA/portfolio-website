@@ -73,4 +73,16 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .button_neon {
+    padding: 1px 8px;
+    border-radius: 28px;
+    border: 1px solid blueviolet;
+    box-shadow: 0 0 5px blueviolet; /* Neon effect */
+  }
+
+  /* Dark mode */
+  .dark .button_neon {
+    box-shadow: 0 0 5px #4caf50; /* Neon effect for dark mode */
+  }
 }

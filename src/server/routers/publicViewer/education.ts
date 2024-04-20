@@ -49,7 +49,8 @@ export const educationRouter = createTRPCRouter({
 
       let newTags: string | string[];
       // Format the Tags:
-      if (typeof tags === "string") newTags = tags.split(",");
+      if (typeof tags === "string")
+        newTags = tags.split(",").map((str) => str.trim());
       else newTags = tags;
 
       return await ctx.db.education.create({
