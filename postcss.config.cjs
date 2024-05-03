@@ -1,8 +1,9 @@
-const config = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+module.exports = {
+  plugins: [
+    "postcss-import",
+    "tailwindcss/nesting",
+    "tailwindcss",
+    "postcss-focus-visible",
+    "autoprefixer",
+  ],
 };
-
-module.exports = config;
