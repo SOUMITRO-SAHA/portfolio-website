@@ -18,6 +18,23 @@ export const openSourceRouter = createTRPCRouter({
         where: { id },
       });
     }),
+  getAllRepos: publicProcedure.query(async ({ ctx }) => {
+    const openSourceRepo = await ctx.db.openSourceContribution.findMany({
+      select: {
+        repository: true,
+      },
+    });
+
+    const uniqueOSRepo = Array.from(
+      new Set(
+        openSourceRepo
+          .flatMap((repo) => repo.repository)
+          .map((repo) => repo.toLowerCase()),
+      ),
+    );
+
+    return uniqueOSRepo;
+  }),
   create: protectedProcedure
     .input(CreateOpenSourceSchema)
     .mutation(async ({ ctx, input }) => {
