@@ -1,188 +1,68 @@
 "use client";
 
+import CEOpenSource from "@/components/CRUD/open-source/template/__template";
 import { AdminPageWrapper } from "@/components/PageWrapper";
+import { AppHeader } from "@/components/app-header";
+import { H3, Section, Title } from "@/components/common";
+import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
-import { CreateOpenSourceSchema } from "@/validators/open-source.validator";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
-import { useForm } from "react-hook-form";
-import type { z } from "zod";
+import { Plus, RotateCcw } from "lucide-react";
+import * as React from "react";
 
 const OpenSourcePage = () => {
-  const [isPending, startTransition] = React.useTransition();
-  const { mutate: createOpenSource, isLoading } =
-    api.openSource.create.useMutation({
-      onError: async (error) => {
-        toast({
-          title: "Something went wrong!!!",
-          description: error.message,
-          variant: "destructive",
-        });
-        console.error(error);
-      },
-      onSuccess: async () => {
-        toast({
-          title: "Successfully added new blog!!!",
-        });
-      },
-    });
+  const [search, setSearch] = React.useState("");
+  const [filter, setFilter] = React.useState<string>("");
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [editEducation, setEditEducation] = React.useState(null);
 
-  const form = useForm<z.infer<typeof CreateOpenSourceSchema>>({
-    resolver: zodResolver(CreateOpenSourceSchema),
-    defaultValues: {
-      isPRMerged: false,
-    },
-  });
+  const { data: openSource, isLoading: openSourceLoading } =
+    api.openSource.getAll.useQuery();
 
-  const onSubmit = (value: z.infer<typeof CreateOpenSourceSchema>) => {
-    startTransition(async () => {
-      createOpenSource({
-        repository: value.repository,
-        description: value.description,
-        prLink: value.prLink,
-        issueLink: value.issueLink,
-        isPRMerged: value.isPRMerged,
+  const { data: openSourceRepos, isLoading: openSourceReposLoading } =
+    api.openSource.getAllRepos.useQuery();
+
+  const filteredSearchResult = () => {
+    if (search || filter) {
+      return openSource?.filter((os) => {
+        const { repository } = os;
+        const lowercaseRepos = repository.toLowerCase();
+
+        return lowercaseRepos.includes((search || filter).toLowerCase());
       });
-    });
+    }
+    return openSource;
   };
-
   return (
     <AdminPageWrapper>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-5"
-        >
-          <div className="grid grid-cols-12 gap-5">
-            {/* Repository */}
-            <div className="col-span-6 items-center justify-between">
-              <FormField
-                control={form.control}
-                name="repository"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Repository*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Repository Link..."
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+      <AppHeader>
+        <div className="flex w-[50%] items-center justify-between xl:w-[40%]">
+          <Title>Open Source</Title>
+          <Button asChild onClick={() => setIsOpen(!isOpen)}>
+            <div className="flex cursor-pointer items-center">
+              <Plus />
+              <span>Create New Open Source</span>
             </div>
-
-            <div className="col-span-6 mb-3 flex items-end gap-1 space-x-2 space-y-2">
-              <FormField
-                control={form.control}
-                name="isPRMerged"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="flex items-end gap-1 ">
-                        <Checkbox
-                          id="isPRMerged"
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                        <div className="grid gap-1.5 leading-none">
-                          <label
-                            htmlFor="isPRMerged"
-                            className="text-sm font-medium uppercase leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                          >
-                            Is PR Merged
-                          </label>
-                        </div>
-                      </div>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
+          </Button>
+        </div>
+        <Search state={search} setState={setSearch} />
+      </AppHeader>
+      {/* Create New OC */}
+      <CEOpenSource isOpen={isOpen} onClose={() => setIsOpen(!isOpen)} />
+      {/* Edit New OC */}
+      <Section>
+        <div>
+          <H3 className="mb-2">Filter By Tags</H3>
+          {filter && (
+            <div
+              className="cursor-pointer rounded-md bg-background p-2"
+              onClick={() => setFilter("")}
+            >
+              <RotateCcw className="h-3 w-3" />
             </div>
-          </div>
-
-          <div className="grid grid-cols-12 items-center justify-between gap-5">
-            <div className="col-span-6">
-              {/* PR URL */}
-              <FormField
-                control={form.control}
-                name="prLink"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>PR Link*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="PR Link..."
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            {/* Issue Link */}
-            <div className="col-span-6">
-              <FormField
-                control={form.control}
-                name="issueLink"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Issue Link*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Issue Link..."
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-
-          {/* Description */}
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description (optional)</FormLabel>
-                <FormControl>
-                  <Textarea
-                    {...field}
-                    disabled={isPending}
-                    placeholder="Write the Description here..."
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-
-          {/* Submit */}
-          <div className="flex items-center justify-end">
-            <Button size={"lg"} loading={isLoading ?? isPending}>
-              Submit
-            </Button>
-          </div>
-        </form>
-      </Form>
+          )}
+        </div>
+      </Section>
     </AdminPageWrapper>
   );
 };

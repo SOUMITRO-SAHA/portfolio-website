@@ -45,8 +45,6 @@ const EducationPage = () => {
     return education;
   };
 
-  console.log("Filter =====> ", filter);
-
   return (
     <AdminPageWrapper>
       <AppHeader>
