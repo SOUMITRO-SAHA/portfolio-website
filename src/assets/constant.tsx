@@ -1,5 +1,12 @@
 import { cn } from "@/utils";
-import { Atom, GitPullRequestArrow, Home, Route, Rss } from "lucide-react";
+import {
+  Atom,
+  FileCheck,
+  GitPullRequestArrow,
+  Home,
+  Route,
+  Rss,
+} from "lucide-react";
 import * as React from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
@@ -35,6 +42,12 @@ export const defaultMenuItems: MenuItem[] = [
     name: "Open Source",
     link: "/open-source",
     icon: <GitPullRequestArrow className="stroke-primary" />,
+  },
+  {
+    id: 5,
+    name: "Certifications",
+    link: "/certifications",
+    icon: <FileCheck className="stroke-primary" />,
   },
   {
     id: 5,

@@ -5,8 +5,15 @@ import React from "react";
 import { SideMenu } from "../sidebar";
 import MobileMenu from "../sidebar/Mobile";
 import { ThemeProvider } from "@/components/common/theme-provider";
+import { cn } from "@/utils";
 
-export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
+export const PageWrapper = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
     <StoreProvider>
       <ThemeProvider
@@ -27,7 +34,12 @@ export const PageWrapper = ({ children }: { children: React.ReactNode }) => {
           </main>
 
           {/* Body */}
-          <main className="col-span-full p-6 px-4 md:col-span-9 xl:col-span-10">
+          <main
+            className={cn(
+              "col-span-full p-6 px-4 md:col-span-9 xl:col-span-10",
+              className,
+            )}
+          >
             {children}
           </main>
         </main>
