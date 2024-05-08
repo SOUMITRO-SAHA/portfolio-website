@@ -1,3 +1,4 @@
+import type { MenuItem } from "@/assets";
 import { cn } from "@/utils";
 
 export const Title = ({ children }: { children: React.ReactNode }) => {
@@ -52,4 +53,19 @@ export const H3 = ({
 
 export const P = ({ children }: { children: React.ReactNode }) => {
   return <p className="leading-relaxed text-zinc-300">{children}</p>;
+};
+
+export const PageTitle = ({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: string;
+}) => {
+  return (
+    <div className="flex items-center gap-2 text-base font-bold capitalize leading-relaxed">
+      <div className="h-5 w-5">{icon}</div>
+      <span>{title}</span>
+    </div>
+  );
 };

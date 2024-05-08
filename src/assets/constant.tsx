@@ -50,7 +50,7 @@ export const defaultMenuItems: MenuItem[] = [
     icon: <FileCheck className="stroke-primary" />,
   },
   {
-    id: 5,
+    id: 6,
     name: "Blogs",
     link: "/blogs",
     icon: <Rss className="stroke-primary" />,

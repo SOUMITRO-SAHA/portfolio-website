@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import { TRPCReactProvider } from "@/trpc/react";
+import { cn } from "@/utils";
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
@@ -23,7 +24,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <TRPCReactProvider cookies={cookies().toString()}>
-        <body className={`font-sans ${inter.variable}`}>
+        <body className={cn(`font-sans ${inter.variable} overflow-hidden`)}>
           {children}
           <Toaster />
 
