@@ -1,7 +1,7 @@
 import { cn } from "@/utils";
 import {
   Atom,
-  FileCheck,
+  FileText,
   GitPullRequestArrow,
   Home,
   Route,
@@ -47,7 +47,7 @@ export const defaultMenuItems: MenuItem[] = [
     id: 5,
     name: "Certifications",
     link: "/certifications",
-    icon: <FileCheck className="stroke-primary" />,
+    icon: <FileText className="stroke-primary" />,
   },
   {
     id: 6,
