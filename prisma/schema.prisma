@@ -141,9 +141,10 @@ model Blog {
 }
 
 model OpenSourceContribution {
-    id         String  @id @default(cuid())
-    repository String
-    isPRMerged Boolean @default(false)
+    id             String  @id @default(cuid())
+    repositoryName String
+    repositoryLink String
+    isPRMerged     Boolean @default(false)
 
     description String?
     issueLink   String?
