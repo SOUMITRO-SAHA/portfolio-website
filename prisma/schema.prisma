@@ -54,7 +54,6 @@ model User {
 
     // Relationship
     sessions                Session[]
-    blogs                   Blog[]
     projects                Project[]
     openSourceContributions OpenSourceContribution[]
     youtubeVideos           YouTubeVideo[]
@@ -137,18 +136,27 @@ model Project {
 }
 
 model Blog {
-    id          String  @id @default(cuid())
-    title       String
-    metadata    Json?
-    content     String?
-    author      String?
-    authorEmail String? @default("soumitrosahaofficial@gmail.com")
+    id                   String @id @default(cuid())
+    title                String
+    subtitle             String
+    brief                String
+    url                  String @unique
+    coverImage           String
+    authorUserName       String
+    authorProfilePicture String
+    metadata             Json?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
-    userId String?
-    user   User?   @relation(fields: [userId], references: [id])
+    tags BlogTag[] @relation("BlogTags")
+}
+
+model BlogTag {
+    name String @id @unique
+    id   String
+
+    blogs Blog[] @relation("BlogTags")
 }
 
 model OpenSourceContribution {
