@@ -11,7 +11,11 @@ const config = {
     defaultLocale: "en-US",
   },
   images: {
-    domains: ["media.licdn.com", "udemy-certificate.s3.amazonaws.com"],
+    domains: [
+      "media.licdn.com",
+      "udemy-certificate.s3.amazonaws.com",
+      "cdn.hashnode.com",
+    ],
   },
 };
 
