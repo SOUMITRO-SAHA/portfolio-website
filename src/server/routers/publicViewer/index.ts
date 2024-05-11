@@ -5,3 +5,4 @@ export * from "./open-source";
 export * from "./post";
 export * from "./user";
 export * from "./test";
+export * from "./certifications";

@@ -1,4 +1,5 @@
 import {
+  FileText,
   GitPullRequestArrow,
   NotebookPen,
   Settings,
@@ -28,12 +29,18 @@ export const adminMenuItems: MenuItem[] = [
   },
   {
     id: 4,
+    name: "Certifications",
+    link: "/admin/certifications",
+    icon: <FileText className="text-primary" />,
+  },
+  {
+    id: 5,
     name: "Open Source",
     link: "/admin/open-source",
     icon: <GitPullRequestArrow className="text-primary" />,
   },
   {
-    id: 5,
+    id: 6,
     name: "Settings",
     link: "/admin/settings",
     icon: <Settings className="text-primary" />,

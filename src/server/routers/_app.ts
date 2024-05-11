@@ -5,6 +5,7 @@ import {
   experienceRouter,
   openSourceRouter,
   testRouter,
+  certificationRouter,
 } from "./publicViewer";
 
 export const appRouter = createTRPCRouter({
@@ -13,6 +14,7 @@ export const appRouter = createTRPCRouter({
   blog: blogRouter,
   openSource: openSourceRouter,
   education: educationRouter,
+  certification: certificationRouter,
 });
 
 export type AppRouter = typeof appRouter;

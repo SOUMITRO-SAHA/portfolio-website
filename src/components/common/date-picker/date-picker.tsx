@@ -5,6 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import * as React from "react";
@@ -12,6 +13,7 @@ import * as React from "react";
 interface DatePickerProps {
   date: Date | undefined;
   setDate: (date: Date | undefined) => void;
+  className?: string;
 }
 
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
@@ -33,6 +35,7 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
           selected={props.date}
           onSelect={props.setDate}
           initialFocus
+          className={cn(props.className)}
         />
       </PopoverContent>
     </Popover>

@@ -49,7 +49,7 @@ export const Modal: React.FC<ModalProps> = ({
         )}
       >
         <div>
-          <h2 className="text-lg font-semibold uppercase leading-relaxed">
+          <h2 className="text-lg font-semibold capitalize leading-relaxed">
             {title}
           </h2>
 
