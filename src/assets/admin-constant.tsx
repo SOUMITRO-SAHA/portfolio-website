@@ -1,7 +1,6 @@
 import {
   GitPullRequestArrow,
   NotebookPen,
-  Rss,
   Settings,
   SquareLibrary,
   User,
