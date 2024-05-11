@@ -2,6 +2,7 @@ import {
   GitPullRequestArrow,
   NotebookPen,
   Rss,
+  Settings,
   SquareLibrary,
   User,
 } from "lucide-react";
@@ -34,9 +35,9 @@ export const adminMenuItems: MenuItem[] = [
   },
   {
     id: 5,
-    name: "Blogs",
-    link: "/admin/blogs",
-    icon: <Rss className="text-primary" />,
+    name: "Settings",
+    link: "/admin/settings",
+    icon: <Settings className="text-primary" />,
   },
 ];
 
